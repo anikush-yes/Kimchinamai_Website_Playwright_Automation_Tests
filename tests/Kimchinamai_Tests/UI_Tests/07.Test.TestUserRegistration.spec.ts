@@ -43,4 +43,3 @@ test.describe('User Registration', () => {
     const accountName = page.locator('header a[href="https://kimchinamai.lt/mano-paskyra"] span');
   });
 });
-
