@@ -1,31 +1,30 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Test Scenario 5: Removing a Product from the Cart', () => {
-  test('Should remove a product from the cart', async ({ page }) => {
-    
-    // 5.1 - 5.2 Navigate to the product page
+test.describe('Removing product from Cart', () => {
+
+  test.setTimeout(60000); 
+
+  test('Remove product and verify cart is empty', async ({ page }) => {
     await page.goto('https://kimchinamai.lt/');
-    
-    // Click on the 'PARDUOTUVĖ' menu item
-    const parduotuveLink = page.getByRole('menuitem', { name: 'PARDUOTUVĖ' }).first();
-    await parduotuveLink.click();
-    await expect(page).toHaveURL('https://kimchinamai.lt/10-parduotuve');
+    await page.waitForLoadState('domcontentloaded');
 
-    // 5.3 Add product to cart
-    const addToCartButtons = page.locator('a[href="#ce-action=addToCart"]');
-    await addToCartButtons.first().click(); // Click on the first product's 'Add to Cart' button
-    await page.waitForTimeout(1000); // Wait for the product to be added
+    await page.getByRole('menuitem', { name: 'PARDUOTUVĖ' }).first().click();
+    await page.waitForLoadState('networkidle');
 
-    // 5.4 Open the Cart (Krepšelis)
+    await page.getByRole('article')
+      .filter({ hasText: '10,20 € Tradicinis kimchi su' })
+      .getByRole('button')
+      .click();
+      
     await page.getByRole('link', { name: 'KREPŠELIS' }).click();
+    await page.waitForLoadState('networkidle');
 
-    // 5.5 Remove product from cart
-    const removeFromCartButtons = page.locator('.remove-from-cart');
-    await removeFromCartButtons.first().click(); // Click on the first remove button
-    await page.waitForTimeout(500); // Wait for the action to complete
+    await page.waitForSelector('a.label', { timeout: 10000 });
 
-    // 5.6 Verify the cart is empty
-    const emptyCartMessage = page.locator('text=Jūsų krepšelyje nėra prekių');
-    await expect(emptyCartMessage).toBeVisible();
+    await expect(page.locator('a.label', { hasText: 'Tradicinis kimchi su' })).toBeVisible();
+
+    await page.locator('#main').getByRole('link').nth(1).click();
+
+    await expect(page.getByText('Jūsų krepšelyje nėra prekių')).toBeVisible();
   });
 });
