@@ -1,0 +1,38 @@
+Functionality of the website https://kimchinamai.lt
+
+
+1. Navigation Menu: 
+
+Provides access to different sections like "Pagrindinis" (Home), "Parduotuvė" (Store) - contains dropdown menu with product selection, "Tinklaraštis" (Blog), and "Kontaktai" (Contact).
+
+2. Product Categories: 
+
+Under "Parduotuvė", products are organized into categories such as "Kimchi", "Rinkiniai" (Sets), "Probiotinės sultys" (Probiotic Juices), "Fermentuoti padažai" (Fermented Sauces), and "Kita" (Other).
+
+3. Product Listings: 
+
+Each category showcases products with details like name, price, description, and "Į krepšelį"(Add to Cart) button, "Prekių pristatymas" (Delivery)
+
+4. Shopping Cart: 
+
+Accessible via the "Krepšelis" (Cart) icon, it displays selected products, quantities, and total price, with options to update quantities or remove items.
+
+5. User Account: 
+
+Users can log in or register through the "Prisijungti" (Log In) option to manage personal information and view order history.
+
+6. Search Function: 
+
+A "Prekių paieška" (Product Search) feature allows users to find specific products by entering keywords.
+
+7. Blog: 
+
+The "Tinklaraštis" (Blog) section offers articles related to kimchi, its benefits, and usage tips.
+
+8. Contact Information: 
+
+The "Kontaktai" (Contact) page provides contact details and a form for customer inquiries.
+
+9. Footer Links: 
+
+Includes quick links to "Privatumo politika" (Privacy Policy), "Sąlygos ir taisyklės" (Terms and Conditions), "Prekių pristatymas" (Product Delivery), and "DUK" (FAQ).

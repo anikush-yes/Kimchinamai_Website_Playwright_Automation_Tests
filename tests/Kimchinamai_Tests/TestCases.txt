@@ -1,0 +1,232 @@
+Test's scenario for the website https://kimchinamai.lt
+
+
+1. Navigation Menu
+
+Test Scenario 1: Navigating Between Pages
+
+Steps:
+
+1.1 Open the homepage. Verify that home page is visible successfully.
+1.2 Check every nav. menu section: "Pagrindinis" (Home), "Parduotuvė" (Store), "Tinklaraštis" (Blog), and "Kontaktai" (Contact).
+1.3 Verify that the correct page loads.
+
+• Expected Result: Each menu item redirects to the correct page.
+
+
+________________________________________________________________________________________________________________________________
+
+
+2. Product Categories
+
+Test Scenario 2: Viewing Product Categories
+
+Steps:
+
+2.1 Open the homepage. Verify that home page is visible successfully:
+2.2 Go to Parduotuvė. Verify that the correct page loads.
+2.3 Click on each category pfrom drop down "Parduotuvė" (Kimchi, Rinkiniai, Probiotinės sultys, Fermentuoti padažai, Kita).
+2.4 Verify that only relevant products are displayed.
+
+• Expected Result: The selected category displays the correct products.
+
+_______________________________________________________________________________________________________________________________
+
+
+3. Product Listings
+
+Test Scenario 3: Checking Product Details
+
+Steps:
+3.1 Open the homepage. Verify that home page is visible successfully.
+3.2 Go to Parduotuvė. Verify that the correct page loads.
+3.3 Select a product from the list, click on the title (Tradicinis kimchi su jūros gėrybėmis)
+3.4 Verify the product name, price, description,"Į krepšelį"(Add to Cart) button, additional description "Aprašymas" "Prekių pristatymas" (Delivery) are correct.
+
+
+• Expected Result: Product details match expected values.
+
+______________________________________________________________________________________________________________________________
+
+
+4. Shopping Cart
+
+Test Scenario 4: Adding a Product to the Cart
+
+Steps:
+4.1 Open the homepage. Verify that home page is visible successfully.
+4.2 Go to Parduotuvė. Verify that the correct page loads.
+4.3 Click Į krepšelį (Сart) on a product.
+4.4 Open the Krepšelis (Cart) page by clicking on modal window.
+4.5 Verify that the selected product appears in the cart.
+
+• Expected Result: The selected product appears in the cart.
+
+_________________________________________________________________________________________________________________________________
+
+
+Test Scenario 5: Removing a Product from the Cart
+
+Steps:
+5.1 Open the homepage. Verify that home page is visible successfully.
+5.2 Go to Parduotuvė. Verify that the correct page loads.
+5.3 Add multiple products in the Cart "Į krepšelį"
+5.4 Open the Krepšelis (Cart)
+5.5 Click the remove (X) button.
+5.6 Verify that the cart is empty.
+
+• Expected Result: The product is removed from the cart.
+
+________________________________________________________________________________________________________________________________
+
+Test Scenario 6: Updating Product Quantity
+
+Steps:
+6.1 Open the homepage. Verify that home page is visible successfully.
+6.2 Go to Parduotuvė. Verify that the correct page loads.
+6.3 Add a product to the cart.
+6.4 Visit Cart
+6.5 Change the quantity using the quantity selector.
+6.6 Verify the price updates accordingly.
+
+• Expected Result: The price updates based on the new quantity.
+
+________________________________________________________________________________________________________________________________
+
+
+5. User Account
+
+Test Scenario 7: User Registration
+
+Steps:
+7.1 Open the homepage. Verify that home page is visible successfully.
+7.2 Click Prisijungti (Login)/ Registruotis (Register) Icon.
+7.3 Verify that the correct page loaded.
+7.4 Click Create account (Sukurti paskyrą)
+7.5 Fill in valid details.
+7.6 Fill in checkboxes
+7.7 Submit the form.
+7.8 Verify that the user is registered.
+
+• Expected Result: A new user account is created.
+
+________________________________________________________________________________________________________________________________
+
+
+Test Scenario 8: User Login
+
+Steps:
+8.1 Open the homepage. Verify that home page is visible successfully.
+8.2 Click Prisijungti (Login)/ Registruotis (Register) Icon.
+8.3 Verify that the correct page loaded.
+8.4 Enter valid login credentials.
+8.5 Submit the form.
+8.6 Verify successful login.
+
+• Expected Result: The user logs in successfully.
+
+________________________________________________________________________________________________________________________________
+
+Test Scenario 9: Incorrect Login
+
+Steps:
+9.1 Open the homepage. Verify that home page is visible successfully.
+9.2 Click Prisijungti (Login)/ Registruotis (Register) Icon.
+9.3 Verify that the correct page loaded.
+9.4 Enter incorrect login credentials.
+9.5 Submit the form.
+
+• Expected Result: The system displays an error message.
+
+________________________________________________________________________________________________________________________________
+
+
+6. Search Function
+
+Test Scenario 10: Searching for a Product
+
+Steps:
+
+10.1 Open the homepage. Verify that home page is visible successfully.
+10.2 Click the Prekių paieška (Search) icon.
+10.3 Verify that the search bar is visible after clicking the icon.
+10.4 Enter a valid product name.
+10.5 Verify the search results.
+
+• Expected Result: Relevant products appear.
+
+________________________________________________________________________________________________________________________________
+
+
+Test Scenario 11: Searching for a Non-Existent Product
+
+Steps:
+11.1 Open the homepage. Verify that home page is visible successfully.
+11.2 Click the Prekių paieška (Search) icon.
+11.3 Verify that the search bar is visible after clicking the icon.
+11.4 Enter a non-existing product name.
+11.5 Check if a "No results found" message appears.
+
+• Expected Result: The system correctly informs the user that the product is unavailable.
+
+________________________________________________________________________________________________________________________________
+
+7. Blog (Tinklaraštis)
+
+Test Scenario 12: Viewing a Blog Post
+!!! Bug detected as Tinklaraštis page is equal Homepage.
+Steps:
+
+12.1 Open Homepage, checking url
+12.2 Open Tinklaraštis, checking url
+12.3 Verifyi that the URL doesn't change after navigating from thoe Home page to cothe Blog (Tinklaraštis) page, the page is the same, the URL remains the same.
+
+• Expected Result: The selected blog post loads with the correct content.
+• Actual Result:
+
+The "Tinklaraštis" page loads the same content as the homepage, showing no blog-specific content, url also remains the same.
+This description should give enough context to investigate and fix the issue!
+________________________________________________________________________________________________________________________________
+
+
+8. Contact Form
+
+Test Scenario 13: Submitting a Contact Form
+
+Steps:
+13.1 Open the homepage and verify that it loads successfully.
+13.2 Click on the "Kontaktai" (Contact) link in the navigation menu.
+13.3 Verify that the contact page loads correctly.
+13.4 Fill in the contact form with valid details (e.g., name, email, message).
+13.5 Submit the form.
+13.6 Verify that a confirmation message appears after submission.
+
+
+• Expected Result: The form is submitted successfully, and a confirmation message appears.
+
+________________________________________________________________________________________________________________________________
+
+Test Scenario 14: Submitting an Empty Contact Form
+
+Steps:
+14.1 Open the homepage and verify that it loads successfully.
+14.2 Click on the "Kontaktai" (Contact) link in the navigation menu.
+14.3 Verify that the contact page loads correctly.
+14.4 Leave all fields blank.
+14.5 Click submit.
+14.6 Verify the error message appears after submission.
+
+• Expected Result: The system displays validation errors.
+
+________________________________________________________________________________________________________________________________
+
+9. Footer Links
+
+Test Scenario 15: Checking Footer Links
+
+Steps:
+
+15.1 Click on each footer link (Pagrindinis, Kontaktai, Privatumo politika, Mano paskyra, Sąlygos ir taisyklės, Prekių pristatymas, DUK).
+15.2 Verify that the correct page loads.
+
+• Expected Result: Each footer link directs to the expected page.

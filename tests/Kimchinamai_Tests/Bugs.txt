@@ -1,0 +1,41 @@
+
+1.
+
+11.Test.SearchingForaNon-ExistentProduct
+
+Bug Description: When searching for a non-existent product, no error message ("No results found") appears, even though the product does not exist in the system. The system should display a clear error message indicating that the product is unavailable or not found.
+
+Bug Steps:
+
+Open the homepage.
+Click on the Prekių paieška (Search) icon.
+Enter a non-existent product name (e.g., "Duona").
+Expected behavior: The system should show a "No results found" message.
+Actual behavior: No error message is shown, and no indication appears that the product was not found.
+Expected Result: The system should display a clear message such as "No results found" when searching for a product that doesn't exist.
+
+Actual Result: No error message or notification appears when searching for a non-existent product.
+
+This kind of bug suggests that the system does not handle the "no results" case properly and needs to show an appropriate error message when no matching product is found.
+
+2.
+
+12.Test.ViewingaBlogPost
+
+Bug: "Tinklaraštis" page is the same as the Homepage
+
+Description:
+
+When attempting to access the "Tinklaraštis" (Blog) page, the page displayed is identical to the homepage, with no distinction between the two pages.
+Steps to Reproduce:
+
+Go to the website.
+Click on the "Tinklaraštis" (Blog) link.
+The page that loads is the homepage, not the expected "Tinklaraštis" (Blog) page.
+Expected Result:
+
+The "Tinklaraštis" page should display unique blog content, different from the homepage.
+Actual Result:
+
+The "Tinklaraštis" page loads the same content as the homepage, showing no blog-specific content.
+This description should give enough context to investigate and fix the issue!
