@@ -4,7 +4,7 @@ test.describe('Shopping Cart', () => {
 
   test.setTimeout(60000); 
 
-  test('Verify product details and shopping cart functionality', async ({ page }) => {
+  test('Should add a product to the cart and verify it', async ({ page }) => {
     await page.goto('https://kimchinamai.lt/');
     await page.waitForLoadState('domcontentloaded');
 
