@@ -8,8 +8,8 @@
 
 ## 📋 Overview
 
-This project involved performing exploratory testing to evaluate the functionality of the webstore (https://kimchinamai.lt). Fifteen test scenarios were developed,
-and 15 test cases were automated using Playwright. A CI pipeline was built in GitHub to automatically execute these tests, ensuring continuous quality assurance.
+This project involved performing **exploratory testing** to evaluate the functionality of the webstore (https://kimchinamai.lt). **Fifteen test scenarios** were developed,
+and 15 test cases were **automated** using **Playwright**. A CI pipeline was built in GitHub to automatically execute these tests, ensuring continuous quality assurance.
 
 ## 🛠️ Technologies Used
 
@@ -28,9 +28,8 @@ and 15 test cases were automated using Playwright. A CI pipeline was built in Gi
 ├── node_modules            # Node.js dependencies
 ├── playwright-report       # Test reports
 ├── test-results            # Test execution results
-├── tests                   # Test files
-│   ├── e2e                 # End-to-end test scenarios
-│   ├── fixtures            # Test fixtures
+├── Kimchinamai_Tests       # Test files
+│   ├── e2e tests           # End-to-end test scenarios
 │   └── page-objects        # Page Object Models
 ├── .eslintrc.json         # ESLint configuration
 ├── .gitignore             # Git ignore rules
@@ -92,89 +91,38 @@ Generate and view HTML report:
 npx playwright show-report
 ```
 
-## 🧩 Test Framework Architecture
-
-### Page Object Model (POM)
-
-The project follows the Page Object Model design pattern, which makes the test code more maintainable and reusable. Each web page has a corresponding page object that encapsulates the page's elements and actions.
-
-Example Page Object (Menu Page):
-
-```typescript
-import { Locator, Page } from "@playwright/test";
-
-export class MenuPage {
-  readonly page: Page;
-  readonly addToCartBtn: Locator;
-
-  constructor(page: Page) {
-    this.page = page;
-    this.addToCartBtn = page.locator("text=Add to cart");
-  }
-
-  async navigate() {
-    await this.page.goto("https://kimchinamai.com/menu");
-  }
-
-  async addItemToCart(itemName: string) {
-    await this.page.locator(`text=${itemName}`).first().click();
-    await this.addToCartBtn.click();
-  }
-}
-```
-
-### Test Fixtures
-
-Playwright fixtures are used to set up the test environment, making it easier to share setup code between tests.
-
-```typescript
-import { test as base } from "@playwright/test";
-import { HomePage } from "../page-objects/home-page";
-import { MenuPage } from "../page-objects/menu-page";
-import { CartPage } from "../page-objects/cart-page";
-
-type TestFixtures = {
-  homePage: HomePage;
-  menuPage: MenuPage;
-  cartPage: CartPage;
-};
-
-export const test = base.extend<TestFixtures>({
-  homePage: async ({ page }, use) => {
-    await use(new HomePage(page));
-  },
-  menuPage: async ({ page }, use) => {
-    await use(new MenuPage(page));
-  },
-  cartPage: async ({ page }, use) => {
-    await use(new CartPage(page));
-  },
-});
-
-export { expect } from "@playwright/test";
-```
-
 ## 📝 Test Examples
 
-### Home Page Navigation Test
+### Home Page Naigation Menu Test
 
 ```typescript
-import { test, expect } from "../fixtures/base-fixture";
+import { test, expect } from '@playwright/test';
 
-test.describe("Home Page Tests", () => {
-  test.beforeEach(async ({ homePage }) => {
-    await homePage.navigate();
-  });
 
-  test("should navigate to menu page from homepage", async ({ homePage }) => {
-    await homePage.clickMenuButton();
-    await expect(homePage.page).toHaveURL(/.*menu/);
-  });
+test.setTimeout(60000);
 
-  test("should validate restaurant contact information", async ({ homePage }) => {
-    const contactInfo = await homePage.getContactInfo();
-    expect(contactInfo).toContain("123-456-7890");
-    expect(contactInfo).toContain("123 Korean Food St, Food City");
+test.describe('Navigation menu test', () => {
+  test('Ensures menu links redirect correctly', async ({ page }) => {
+   
+    console.log('Page loads...');
+    await page.goto('https://kimchinamai.lt/', { timeout: 60000 });
+    await page.waitForLoadState('networkidle');
+
+    const menuItems = [
+      { name: 'PAGRINDINIS', url: 'https://kimchinamai.lt/' },
+      { name: 'PARDUOTUVĖ', url: 'https://kimchinamai.lt/10-parduotuve' },
+      { name: 'TINKLARAŠTIS', url: 'https://kimchinamai.lt/' },
+      { name: 'KONTAKTAI', url: 'https://kimchinamai.lt/susisiekite-su-mumis' }
+    ];
+
+    for (const { name, url } of menuItems) {
+      console.log(`Testing Each Nav Menu Item: ${name}`);
+      await page.getByRole('menuitem', { name }).first().click();
+      await page.waitForLoadState('networkidle');
+
+      console.log(`Checking URL: ${await page.url()}`);
+      await expect(page).toHaveURL(url);
+    }
   });
 });
 ```
@@ -182,39 +130,41 @@ test.describe("Home Page Tests", () => {
 ### Shopping Cart Test
 
 ```typescript
-import { test, expect } from "../fixtures/base-fixture";
+import { test, expect } from '@playwright/test';
 
-test.describe("Shopping Cart Tests", () => {
-  test("should add item to cart and verify cart count", async ({ menuPage, cartPage }) => {
-    // Navigate to menu page
-    await menuPage.navigate();
+test.describe('Shopping Cart', () => {
+
+  test.setTimeout(60000); 
+
+  test('Should add a product to the cart and verify it', async ({ page }) => {
+    await page.goto('https://kimchinamai.lt/');
+    await page.waitForLoadState('domcontentloaded');
+
+    await page.getByRole('menuitem', { name: 'PARDUOTUVĖ' }).first().click();
+    await page.waitForLoadState('networkidle');
+
+    await page.getByRole('article')
+      .filter({ hasText: '10,20 € Tradicinis kimchi su' })
+      .getByRole('button')
+      .click();
+
+    await page.getByRole('link', { name: 'KREPŠELIS' }).click();
+    await page.waitForLoadState('networkidle');
+
+    const productLink = page.locator('#main')
+      .getByRole('link', { name: /Tradicinis kimchi/ });
+
+    await productLink.waitFor({ state: 'visible', timeout: 60000 });
+    await productLink.click();
+
+    await page.waitForLoadState('networkidle');
+
+    const price = await page.locator('.ce-product-price > span').first().textContent();
+
+    const priceText = price?.replace(/\s/g, ''); 
+expect(priceText).toBe('10,20€');
     
-    // Add Bibimbap to cart
-    await menuPage.addItemToCart("Bibimbap");
-    
-    // Verify cart count badge shows 1 item
-    const cartCount = await cartPage.getCartItemCount();
-    expect(cartCount).toBe(1);
-  });
-  
-  test("should update item quantity in cart", async ({ menuPage, cartPage }) => {
-    // Navigate to menu page and add item to cart
-    await menuPage.navigate();
-    await menuPage.addItemToCart("Bulgogi");
-    
-    // Navigate to cart page
-    await cartPage.navigate();
-    
-    // Update item quantity to 3
-    await cartPage.updateItemQuantity("Bulgogi", 3);
-    
-    // Verify quantity was updated
-    const quantity = await cartPage.getItemQuantity("Bulgogi");
-    expect(quantity).toBe(3);
-    
-    // Verify subtotal was updated
-    const subtotal = await cartPage.getSubtotal();
-    expect(subtotal).toMatch(/\$\d+\.\d{2}/);
+    await expect(page.getByText('Tradicinis - tikra kimchi')).toBeVisible();
   });
 });
 ```
@@ -278,7 +228,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Contact
 
-Project Maintainer: [anikush-yes](https://github.com/anikush-yes)
+Project Maintainer: anikush@hotmail.com
 
 ---
 
